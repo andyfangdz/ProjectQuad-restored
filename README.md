@@ -1,4 +1,4 @@
 ProjectQuad
 ===========
 
-The official repository foe Project Quad
+The official repository for Project Quad
