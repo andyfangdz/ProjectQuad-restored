@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.8.22)  25 AUG 2013 00:57
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.8.22)  29 AUG 2013 16:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -309,8 +309,12 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
 Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2009/06/22 v3.00
+(/usr/share/texlive/texmf-dist/tex/latex/draftwatermark/draftwatermark.sty
+Package: draftwatermark 2006/06/30 1.0 Put a gray textual watermark on document
+ pages
+
+(/usr/share/texlive/texmf-dist/tex/latex/everypage/everypage.sty
+Package: everypage 2007/06/20 1.1 Hooks to run on every page
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
@@ -343,6 +347,19 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 ))
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+\sc@wm@fontsize=\skip46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2009/06/22 v3.00
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
@@ -463,7 +480,7 @@ Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip46
+\Hy@SectionHShift=\skip47
 )
 \@float@every@figure=\toks24
 
@@ -484,20 +501,20 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -528,7 +545,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box31
-Package hyperref Info: Link coloring OFF on input line 15.
+Package hyperref Info: Link coloring OFF on input line 19.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -538,9 +555,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count120
 )
-LaTeX Info: Redefining \ref on input line 15.
-LaTeX Info: Redefining \pageref on input line 15.
-LaTeX Info: Redefining \nameref on input line 15.
+LaTeX Info: Redefining \ref on input line 19.
+LaTeX Info: Redefining \pageref on input line 19.
+LaTeX Info: Redefining \nameref on input line 19.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
@@ -590,9 +607,14 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1
+)
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./main.toc)
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <142.26378> not available
+(Font)              size <24.88> substituted on input line 38.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+]) (./main.toc)
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
@@ -600,13 +622,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.20 \newpage
+l.24 \newpage
               [1] (./Basic_Concept.tex
-
-LaTeX Warning: Citation `wikipedia1' on page 2 undefined on input line 3.
-
-
-<./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG, id=39, 250.9375pt x 334.24875
+<./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG, id=41, 250.9375pt x 334.24875
 pt>
 File: ./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG Graphic file (type jpg)
  <use ./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG>
@@ -624,7 +642,7 @@ erted-to.pdf ./Pictures/flying.eps>
 (epstopdf)             \includegraphics on input line 14.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Pictures/flying-eps-converted-to.pdf, id=41, 205.76875pt x 327.2225pt>
+<./Pictures/flying-eps-converted-to.pdf, id=43, 205.76875pt x 327.2225pt>
 File: ./Pictures/flying-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Pictures/flying-eps-converted-to.pdf>
@@ -632,7 +650,7 @@ Package pdftex.def Info: ./Pictures/flying-eps-converted-to.pdf used on input l
 ine 14.
 (pdftex.def)             Requested size: 145.11053pt x 230.7618pt.
 
-<./Pictures/Quadrotor_yaw_torque.png, id=42, 326.21875pt x 338.26375pt>
+<./Pictures/Quadrotor_yaw_torque.png, id=44, 326.21875pt x 338.26375pt>
 File: ./Pictures/Quadrotor_yaw_torque.png Graphic file (type png)
 
 <use ./Pictures/Quadrotor_yaw_torque.png>
@@ -641,7 +659,7 @@ Package pdftex.def Info: ./Pictures/Quadrotor_yaw_torque.png used on input line
 (pdftex.def)             Requested size: 145.11053pt x 150.47269pt.
  [2 <./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG> <./Pictures/flying-eps-co
 nverted-to.pdf>]
-<./Pictures/yaw.png, id=58, 513.92pt x 513.92pt>
+<./Pictures/yaw.png, id=60, 513.92pt x 513.92pt>
 File: ./Pictures/yaw.png Graphic file (type png)
  <use ./Pictures/yaw.png>
 Package pdftex.def Info: ./Pictures/yaw.png used on input line 34.
@@ -651,7 +669,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--36
 
  []
 
-<./Pictures/pitch.png, id=60, 513.92pt x 513.92pt>
+<./Pictures/pitch.png, id=62, 513.92pt x 513.92pt>
 File: ./Pictures/pitch.png Graphic file (type png)
  <use ./Pictures/pitch.png>
 Package pdftex.def Info: ./Pictures/pitch.png used on input line 42.
@@ -677,40 +695,42 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--55
  []
 
 ) [4] (./Bib.tex)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 28.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 32.
  [5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 28.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 32.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 28.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 28.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 32.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 32.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: B9EF7A6CC9CC35C3D456498B77AB28E0;249.
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 117.38377pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 28.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 32.
  ) 
 Here is how much of TeX's memory you used:
- 6578 strings out of 495059
- 93265 string characters out of 3182030
- 178813 words of memory out of 3000000
- 9652 multiletter control sequences out of 15000+200000
- 9227 words of font info for 35 fonts, out of 3000000 for 9000
+ 6671 strings out of 495059
+ 94991 string characters out of 3182030
+ 181113 words of memory out of 3000000
+ 9732 multiletter control sequences out of 15000+200000
+ 9526 words of font info for 36 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,8n,28p,295b,332s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,11n,28p,295b,336s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (6 pages, 194385 bytes).
+t/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (6 pages, 203530 bytes).
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
+ 125 PDF objects out of 1000 (max. 8388607)
+ 98 compressed objects within 1 object stream
  20 named destinations out of 1000 (max. 500000)
  58 words of extra memory for PDF output out of 10000 (max. 10000000)
 
