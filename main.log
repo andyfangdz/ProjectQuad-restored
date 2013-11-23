@@ -1,12 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.8.22)  29 AUG 2013 16:54
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.13)  24 NOV 2013 04:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, lo
-aded.
+Babel <3.9f> and hyphenation patterns for 2 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -242,7 +241,7 @@ Now handling font encoding U ...
    defining Unicode char U+2423 (decimal 9251)
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2000/07/18 v2.13 AMS math features
+Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
@@ -262,20 +261,20 @@ Package: amsbsy 1999/11/29 v1.2d
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count87
-LaTeX Info: Redefining \frac on input line 211.
+LaTeX Info: Redefining \frac on input line 210.
 \uproot@=\count88
 \leftroot@=\count89
-LaTeX Info: Redefining \overline on input line 307.
+LaTeX Info: Redefining \overline on input line 306.
 \classnum@=\count90
 \DOTSCASE@=\count91
-LaTeX Info: Redefining \ldots on input line 379.
-LaTeX Info: Redefining \dots on input line 382.
-LaTeX Info: Redefining \cdots on input line 467.
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
 \Mathstrutbox@=\box26
 \strutbox@=\box27
 \big@size=\dimen105
-LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \macc@depth=\count92
 \c@MaxMatrixCols=\count93
 \dotsspace@=\muskip10
@@ -296,15 +295,15 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 \multlinegap=\skip44
 \multlinetaggap=\skip45
 \mathdisplay@stack=\toks20
-LaTeX Info: Redefining \[ on input line 2666.
-LaTeX Info: Redefining \] on input line 2667.
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
 Package: makeidx 2000/03/29 v1.0m Standard LaTeX package
@@ -359,7 +358,7 @@ Package color Info: Driver file: pdftex.def on input line 130.
 \sc@wm@fontsize=\skip46
 )
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2009/06/22 v3.00
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
@@ -370,7 +369,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@floatcapt=\box29
 )
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2012/05/13 v6.82q Hypertext links for LaTeX
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
@@ -420,6 +419,9 @@ Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
 (/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
@@ -428,7 +430,7 @@ Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 \Hy@pagecounter=\count102
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2012/05/13 v6.82q Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -437,32 +439,33 @@ Now handling font encoding PD1 ...
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4062.
-Package hyperref Info: Link nesting OFF on input line 4067.
-Package hyperref Info: Hyper index ON on input line 4070.
-Package hyperref Info: Plain pages OFF on input line 4077.
-Package hyperref Info: Backreferencing OFF on input line 4082.
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4300.
+Package hyperref Info: Bookmarks ON on input line 4688.
 \c@Hy@tempcnt=\count104
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4653.
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen115
 \Fld@menulength=\count105
-\Field@Width=\dimen115
-\Fld@charsize=\dimen116
-Package hyperref Info: Hyper figures OFF on input line 5773.
-Package hyperref Info: Link nesting OFF on input line 5778.
-Package hyperref Info: Hyper index ON on input line 5781.
-Package hyperref Info: backreferencing OFF on input line 5788.
-Package hyperref Info: Link coloring OFF on input line 5793.
-Package hyperref Info: Link coloring with OCG OFF on input line 5798.
-Package hyperref Info: PDF/A mode OFF on input line 5803.
-LaTeX Info: Redefining \ref on input line 5843.
-LaTeX Info: Redefining \pageref on input line 5847.
+\Field@Width=\dimen116
+\Fld@charsize=\dimen117
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
 \Hy@abspage=\count106
 \c@Item=\count107
 \c@Hfootnote=\count108
@@ -471,7 +474,7 @@ LaTeX Info: Redefining \pageref on input line 5847.
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2012/05/13 v6.82q Hyperref driver for pdfTeX
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
 \Fld@listcount=\count109
 \c@bookmark@seq@number=\count110
 
@@ -489,14 +492,14 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@cnth=\count111
 \Gm@cntv=\count112
 \c@Gm@tempcnt=\count113
-\Gm@bindingoffset=\dimen117
-\Gm@wd@mp=\dimen118
-\Gm@odd@mp=\dimen119
-\Gm@even@mp=\dimen120
-\Gm@layoutwidth=\dimen121
-\Gm@layoutheight=\dimen122
-\Gm@layouthoffset=\dimen123
-\Gm@layoutvoffset=\dimen124
+\Gm@bindingoffset=\dimen118
+\Gm@wd@mp=\dimen119
+\Gm@odd@mp=\dimen120
+\Gm@even@mp=\dimen121
+\Gm@layoutwidth=\dimen122
+\Gm@layoutheight=\dimen123
+\Gm@layouthoffset=\dimen124
+\Gm@layoutvoffset=\dimen125
 \Gm@dimlist=\toks25
 ) (./main.aux)
 \openout1 = `main.aux'.
@@ -519,13 +522,13 @@ LaTeX Font Info:    ... okay on input line 19.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count114
-\scratchdimen=\dimen125
+\scratchdimen=\dimen126
 \scratchbox=\box30
 \nofMPsegments=\count115
 \nofMParguments=\count116
 \everyMPshowfont=\toks26
 \MPscratchCnt=\count117
-\MPscratchDim=\dimen126
+\MPscratchDim=\dimen127
 \MPnumerator=\count118
 \makeMPintoPDFobject=\count119
 \everyMPtoPDFconversion=\toks27
@@ -548,7 +551,7 @@ e
 Package hyperref Info: Link coloring OFF on input line 19.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
@@ -601,12 +604,12 @@ LaTeX Info: Redefining \nameref on input line 19.
 (./title.tex
 LaTeX Font Info:    Try loading font information for U+msa on input line 24.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <142.26378> not available
@@ -624,7 +627,7 @@ been already used, duplicate ignored
                    \relax 
 l.24 \newpage
               [1] (./Basic_Concept.tex
-<./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG, id=41, 250.9375pt x 334.24875
+<./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG, id=56, 250.9375pt x 334.24875
 pt>
 File: ./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG Graphic file (type jpg)
  <use ./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG>
@@ -632,17 +635,17 @@ Package pdftex.def Info: ./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG used o
 n input line 7.
 (pdftex.def)             Requested size: 145.11053pt x 193.29828pt.
 Package epstopdf Info: Source file: <./Pictures/flying.eps>
-(epstopdf)                    date: 2013-08-25 00:15:01
+(epstopdf)                    date: 2013-10-25 00:54:21
 (epstopdf)                    size: 11192 bytes
 (epstopdf)             Output file: <./Pictures/flying-eps-converted-to.pdf>
-(epstopdf)                    date: 2013-08-25 00:15:04
+(epstopdf)                    date: 2013-10-25 00:54:21
 (epstopdf)                    size: 5645 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Pictures/flying-eps-conv
 erted-to.pdf ./Pictures/flying.eps>
 (epstopdf)             \includegraphics on input line 14.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Pictures/flying-eps-converted-to.pdf, id=43, 205.76875pt x 327.2225pt>
+<./Pictures/flying-eps-converted-to.pdf, id=58, 205.76875pt x 327.2225pt>
 File: ./Pictures/flying-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Pictures/flying-eps-converted-to.pdf>
@@ -650,7 +653,7 @@ Package pdftex.def Info: ./Pictures/flying-eps-converted-to.pdf used on input l
 ine 14.
 (pdftex.def)             Requested size: 145.11053pt x 230.7618pt.
 
-<./Pictures/Quadrotor_yaw_torque.png, id=44, 326.21875pt x 338.26375pt>
+<./Pictures/Quadrotor_yaw_torque.png, id=59, 326.21875pt x 338.26375pt>
 File: ./Pictures/Quadrotor_yaw_torque.png Graphic file (type png)
 
 <use ./Pictures/Quadrotor_yaw_torque.png>
@@ -659,7 +662,7 @@ Package pdftex.def Info: ./Pictures/Quadrotor_yaw_torque.png used on input line
 (pdftex.def)             Requested size: 145.11053pt x 150.47269pt.
  [2 <./Pictures/250px-ReuseumMakerFaireQuadrotor.JPG> <./Pictures/flying-eps-co
 nverted-to.pdf>]
-<./Pictures/yaw.png, id=60, 513.92pt x 513.92pt>
+<./Pictures/yaw.png, id=75, 513.92pt x 513.92pt>
 File: ./Pictures/yaw.png Graphic file (type png)
  <use ./Pictures/yaw.png>
 Package pdftex.def Info: ./Pictures/yaw.png used on input line 34.
@@ -669,7 +672,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 30--36
 
  []
 
-<./Pictures/pitch.png, id=62, 513.92pt x 513.92pt>
+<./Pictures/pitch.png, id=77, 513.92pt x 513.92pt>
 File: ./Pictures/pitch.png Graphic file (type png)
  <use ./Pictures/pitch.png>
 Package pdftex.def Info: ./Pictures/pitch.png used on input line 42.
@@ -694,15 +697,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--55
 
  []
 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 69.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 69.
 ) [4] (./Bib.tex)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 32.
- [5]
+
+[5]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 32.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 32.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 32.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B9EF7A6CC9CC35C3D456498B77AB28E0;249.
+(rerunfilecheck)             Checksum: F12C4A5ADAF12B60C1D1550A53966830;473.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -711,26 +721,30 @@ LaTeX Font Warning: Size substitutions with differences
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 32.
  ) 
 Here is how much of TeX's memory you used:
- 6671 strings out of 495059
- 94991 string characters out of 3182030
- 181113 words of memory out of 3000000
- 9732 multiletter control sequences out of 15000+200000
- 9526 words of font info for 36 fonts, out of 3000000 for 9000
+ 6830 strings out of 495031
+ 97524 string characters out of 6181530
+ 183786 words of memory out of 5000000
+ 9896 multiletter control sequences out of 15000+600000
+ 12794 words of font info for 49 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,11n,28p,295b,336s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,11n,28p,574b,340s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (6 pages, 203530 bytes).
+/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on main.pdf (6 pages, 251269 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
- 98 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 58 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 166 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 82 words of extra memory for PDF output out of 10000 (max. 10000000)
 
