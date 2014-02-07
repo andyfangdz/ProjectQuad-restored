@@ -5,6 +5,18 @@ entering extended mode
 **Basic_Concept.tex
 (./Basic_Concept.tex
 LaTeX2e <2011/06/27>
+ebug["flags"]=bkp
+        debug["EVENT_LBUTTONDOWN"]=cv2.EVENT_LBUTTONDOWN
+        debug["EVENT_FLAG_LBUTTON"]=cv2.EVENT_FLAG_LBUTTON
+        print debug
+        #print cv2.EVENT_LBUTTONDOWN
+        if self.drag_start:
+            #print "Did reached here."
+            #print debug
+            #print cv2.EVENT_LBUTTONDOWN
+            if  flags & cv2.EVENT_FLAG_LBUTTON:
+                print "Did reached here."
+                            else:
 Babel <3.9f> and hyphenation patterns for 2 languages loaded.
 ! Undefined control sequence.
 l.1 \subsection

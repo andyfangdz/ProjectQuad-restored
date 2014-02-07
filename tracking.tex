@@ -1,0 +1,38 @@
+\section{Optical Tracking}
+\subsection{Overview}
+The Optical Tracking System is implemented with three subsystems: 
+\begin{enumerate}
+  \item Video Extraction
+  \item Pinhole Camera Model
+  \item Epipolar Geometry
+\end{enumerate}
+\subsection{Video Extraction}
+The Video Extraction system's function is to extract the location of a patricular object within the video footage. The objects, in this case, are differently colored small balls. The small balls represent sever key points of the Quadcopter. By determining the location of the balls, we will be able to calculate the position and attitude of the Quadcopter.
+The procedure of video extraction is described as following:
+\begin{enumerate}
+  \item Shotting: Get images from camera,
+  \item Transforming: transform the image to HSV colorspace,
+  \item Extracting: use tresholding to extract pixels in patricular color range,
+  \item Denoising: use opening and closing to denoise,
+  \item Determining: use CamShift algorithm to determin the centroid of the extracted pixels.
+\end{enumerate}
+\subsubsection {Shooting}
+In this project, v4l\footnote{a.k.a. Video For Linux} is as the middleware of OpenCV and camera. With \emph{v4l} and \emph{OpenCV}, reading an image from camera is as easy as following:
+\lstset{language=python}
+\begin{lstlisting}
+cap = cv2.VideoCapture(source)
+img = cap.read()
+\end{lstlisting}
+\subsubsection {Transforming}
+Different from the RGB colorspace, HSV colorspace has a unique character: its V channel represents the brightness. If we remove V channel from tresholding, the same color profile will be able to work in different lighting conditions.
+The transforming process is printed below:
+\begin{lstlisting}
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+\end{lstlisting}
+Note that by default, OpenCV uses BGR color space.
+\subsubsection{Extracting}
+OpenCV's built in treshold function is used to utilize multithreading.
+The process of tresholding is printed below:
+\begin{lstlisting}
+mask = cv2.inRange(hsv, np.array((0., 60., 32.)), np.array((180., 255., 255.)))
+\end{lstlisting}
