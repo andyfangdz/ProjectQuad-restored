@@ -1,23 +1,11 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.13)  24 NOV 2013 14:24
+This is XeTeX, Version 3.1415926-2.2-0.9995.2 (TeX Live 2009/Debian) (format=xelatex 2014.2.8)  8 FEB 2014 15:30
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **Basic_Concept.tex
 (./Basic_Concept.tex
-LaTeX2e <2011/06/27>
-ebug["flags"]=bkp
-        debug["EVENT_LBUTTONDOWN"]=cv2.EVENT_LBUTTONDOWN
-        debug["EVENT_FLAG_LBUTTON"]=cv2.EVENT_FLAG_LBUTTON
-        print debug
-        #print cv2.EVENT_LBUTTONDOWN
-        if self.drag_start:
-            #print "Did reached here."
-            #print debug
-            #print cv2.EVENT_LBUTTONDOWN
-            if  flags & cv2.EVENT_FLAG_LBUTTON:
-                print "Did reached here."
-                            else:
-Babel <3.9f> and hyphenation patterns for 2 languages loaded.
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
 ! Undefined control sequence.
 l.1 \subsection
                {Quadcopter}
@@ -189,7 +177,7 @@ Missing character: There is no [ in font nullfont!
 \citation{cite1}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .
+                                                  \space undefined\on@line .^^J
 l.3 ...d and propelled by four rotors.\cite{cite1}
                                                   
 The control sequence at the end of the top line
@@ -276,7 +264,7 @@ look up `weird error' in the index to The TeXbook.)
 l.7     \includegraphics[width=0.3\textwidth]
                                              {./Pictures/250px-ReuseumMakerF...
 Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+cm, mm, dd, cc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
 To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
@@ -385,7 +373,7 @@ Missing character: There is no [ in font nullfont!
 \citation{cite1}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
-                                                  \space undefined\on@line .
+                                                  \space undefined\on@line .^^J
 l.8 ...uadcopter in Garden City, Idaho\cite{cite1}
                                                   }\\
 The control sequence at the end of the top line
@@ -518,7 +506,7 @@ look up `weird error' in the index to The TeXbook.)
 l.14     \includegraphics[width=0.3\textwidth]
                                               {./Pictures/flying.eps}
 Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+cm, mm, dd, cc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
 To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
@@ -720,7 +708,7 @@ look up `weird error' in the index to The TeXbook.)
 l.22     \includegraphics[width=0.3\textwidth]
                                               {./Pictures/Quadrotor_yaw_torq...
 Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+cm, mm, dd, cc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
 To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
@@ -1182,7 +1170,7 @@ look up `weird error' in the index to The TeXbook.)
 l.34     \includegraphics[width=0.3\textwidth]
                                               {./Pictures/yaw.png}
 Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+cm, mm, dd, cc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
 To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
@@ -1402,7 +1390,7 @@ look up `weird error' in the index to The TeXbook.)
 l.42     \includegraphics[width=0.3\textwidth]
                                               {./Pictures/pitch.png}
 Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+cm, mm, dd, cc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
 To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
@@ -1658,7 +1646,7 @@ Missing character: There is no 3 in font nullfont!
 l.50     \includegraphics[width=0.3\textwidth, a
                                                 ngle=90]{./Pictures/pitch.png}
 Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+cm, mm, dd, cc, bp, or sp; but yours is a new one!
 I'll assume that you meant to say pt, for printer's points.
 To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
@@ -3676,11 +3664,11 @@ Missing character: There is no . in font nullfont!
 
  
 Here is how much of TeX's memory you used:
- 18 strings out of 495031
- 272 string characters out of 6181530
- 50720 words of memory out of 5000000
- 3323 multiletter control sequences out of 15000+600000
- 4294 words of font info for 16 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 20i,5n,26p,553b,102s stack positions out of 5000i,500n,10000p,200000b,80000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 17 strings out of 495724
+ 181 string characters out of 1189347
+ 49194 words of memory out of 3000000
+ 3248 multiletter control sequences out of 15000+50000
+ 4294 words of font info for 16 fonts, out of 3000000 for 9000
+ 28 hyphenation exceptions out of 8191
+ 20i,5n,26p,553b,102s stack positions out of 5000i,500n,10000p,200000b,50000s
+No pages of output.
