@@ -5,6 +5,10 @@ __pycache__/
 # C extensions
 *.so
 
+*.dvi
+*.idx
+*.out
+
 # Distribution / packaging
 .Python
 env/
