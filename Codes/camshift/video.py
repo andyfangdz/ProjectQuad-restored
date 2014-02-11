@@ -152,6 +152,7 @@ def create_capture(source = 0, fallback = presets['chess']):
         except: pass
     else:
         cap = cv2.VideoCapture(source)
+        cap.set(cv2.cv.CV_CAP_PROP_FOURCC ,cv2.cv.CV_FOURCC('M', 'J', 'P', 'G') )
         if 'size' in params:
             w, h = map(int, params['size'].split('x'))
             cap.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, w)

@@ -29,6 +29,9 @@ import video
 size_treshold = 4
 side_inc = 2
 size_maxium = 256
+flag= True
+MorphOps = False
+Channel = False
 
 def abs(n):
     if n>0:
@@ -86,6 +89,7 @@ class App(object):
         elif event == cv2.EVENT_LBUTTONUP:
             self.mouse_state = 0
             self.drag_start = None
+            flag= False
             if self.selection is not None:
                 self.tracking_state = 1 
     def show_hist(self):
@@ -99,7 +103,10 @@ class App(object):
         cv2.imshow('hist', img)
 
     def run(self):
+        global MorphOps
+        global Channel
         while True:
+
             ret, self.frame = self.cam.read()
             vis = self.frame.copy()
             hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
@@ -110,7 +117,10 @@ class App(object):
                 self.track_window = (x0, y0, x1-x0, y1-y0)
                 hsv_roi = hsv[y0:y1, x0:x1]
                 mask_roi = mask[y0:y1, x0:x1]
-                hist = cv2.calcHist( [hsv_roi], [0], mask_roi, [16], [0, 180] )
+                if Channel:
+                    hist = cv2.calcHist( [hsv_roi], [0,1], mask_roi, [32,10], [0, 180, 0 ,256] )
+                else:
+                    hist = cv2.calcHist( [hsv_roi], [0], mask_roi, [32], [0, 180] )
                 cv2.normalize(hist, hist, 0, 255, cv2.NORM_MINMAX);
                 self.hist = hist.reshape(-1)
                 self.show_hist()
@@ -120,13 +130,17 @@ class App(object):
                 vis[mask == 0] = 0
 
             if self.tracking_state == 2:
-                prob = cv2.calcBackProject([hsv], [0], self.hist, [0, 180], 1)
+                if Channel:
+                    prob = cv2.calcBackProject([hsv], [0,1], self.hist, [0, 180, 0, 256], 1)
+                else:
+                    prob = cv2.calcBackProject([hsv], [0], self.hist, [0, 180], 1)
                 prob &= mask
                 term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
                 self.previous_window = self.track_window
                 kernel = np.ones((5,5),np.uint8)
-                prob = cv2.morphologyEx(prob, cv2.MORPH_OPEN, kernel)
-                prob = cv2.morphologyEx(prob, cv2.MORPH_CLOSE, kernel)
+                if MorphOps:
+                    prob = cv2.morphologyEx(prob, cv2.MORPH_OPEN, kernel)
+                    prob = cv2.morphologyEx(prob, cv2.MORPH_CLOSE, kernel)
                 track_box, self.track_window = cv2.CamShift(prob, self.track_window, term_crit)
                 if get_window_size(self.track_window) <= size_treshold:
                     self.track_window = get_increased_window(self.previous_window)
@@ -134,17 +148,22 @@ class App(object):
                 else :
                     self.tracking_state = 1
                 font = cv2.FONT_HERSHEY_SIMPLEX
+                print "Target Missing."
                 cv2.putText(vis,'Target Missing',(10,400), font, 1,(255,255,255),2,1)
 
             if self.tracking_state == 1:
                 self.selection = None
-                prob = cv2.calcBackProject([hsv], [0], self.hist, [0, 180], 1)
+                if Channel:
+                    prob = cv2.calcBackProject([hsv], [0,1], self.hist, [0, 180, 0, 256], 1)
+                else:
+                    prob = cv2.calcBackProject([hsv], [0], self.hist, [0, 180], 1)
                 prob &= mask
                 term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
                 self.previous_window = self.track_window
                 kernel = np.ones((5,5),np.uint8)
-                prob = cv2.morphologyEx(prob, cv2.MORPH_OPEN, kernel)
-                prob = cv2.morphologyEx(prob, cv2.MORPH_CLOSE, kernel)
+                if MorphOps:
+                    prob = cv2.morphologyEx(prob, cv2.MORPH_OPEN, kernel)
+                    prob = cv2.morphologyEx(prob, cv2.MORPH_CLOSE, kernel)
                 track_box, self.track_window = cv2.CamShift(prob, self.track_window, term_crit)
                 if get_window_size(self.track_window) <= size_treshold:
                     self.track_window = get_increased_window(self.previous_window)
@@ -153,17 +172,23 @@ class App(object):
                     vis[:] = prob[...,np.newaxis]
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(vis,str(track_box[0]),(10,400), font, 1,(255,255,255),2,1)
+                print str(track_box[0])
                 try: cv2.ellipse(vis, track_box, (0, 0, 255), 2)
                 except: print track_box
 
-            cv2.imshow('Original Footage',self.frame)
-            cv2.imshow('camshift', vis)
+            #cv2.imshow('Original Footage',self.frame)
+            if flag:
+                cv2.imshow('camshift', vis)
 
             ch = 0xFF & cv2.waitKey(5)
             if ch == 27:
                 break
             if ch == ord('b'):
                 self.show_backproj = not self.show_backproj
+            if ch == ord('m'):
+                MorphOps = not MorphOps
+            if ch == ord('c'):
+                Channel = not Channel
         cv2.destroyAllWindows()
 
 
