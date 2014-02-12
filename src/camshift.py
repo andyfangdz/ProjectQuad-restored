@@ -25,6 +25,7 @@ Keys:
 import numpy as np
 import cv2
 import video
+from utils import mark
 
 size_treshold = 4
 side_inc = 2
@@ -173,8 +174,9 @@ class App(object):
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(vis,str(track_box[0]),(10,400), font, 1,(255,255,255),2,1)
                 print str(track_box[0])
-                try: cv2.ellipse(vis, track_box, (0, 0, 255), 2)
-                except: print track_box
+                #try: cv2.ellipse(vis, track_box, (0, 0, 255), 2)
+                #except: print track_box
+                mark.draw_machine_mark(60, track_box[0], vis)
 
             #cv2.imshow('Original Footage',self.frame)
             if flag:

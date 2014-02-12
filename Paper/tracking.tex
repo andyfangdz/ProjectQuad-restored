@@ -14,15 +14,15 @@ The procedure of video extraction is described as following:
   \item Transforming: transform the image to HSV colorspace,
   \item Extracting: use tresholding to extract pixels in patricular color range, then use histogram and backprojection to determin the probablity that the pixels belong to the model,
   \item Denoising: use opening and closing to denoise,
-  \item Determining: use CamShift algorithm to determin the centroid of the extracted pixels.
+  \item Determining: use \emph{Lucas-Kanade} and \emph{CamShift} algorithm to determin the centroid of the extracted pixels.
 \end{enumerate}
 \subsubsection{Shooting}
-In this project, v4l\footnote{a.k.a. Video For Linux} is as the middleware of OpenCV and camera. With \emph{v4l} and \emph{OpenCV}, reading an image from camera is as easy as following:
+In this project, v4l\footnote{a.k.a. Video For Linux} is the middleware of OpenCV and camera. With \emph{v4l} and \emph{OpenCV}, reading an image from camera is as easy as following:
 \lstset{language=python}
-\begin{lstlisting}
+\begin{python}
 cap = cv2.VideoCapture(source)
 img = cap.read()
-\end{lstlisting}
+\end{python}
 \subsubsection{Transforming}
 Different from the RGB colorspace, HSV colorspace has a unique character: its V channel represents the brightness. If we remove V channel from tresholding, the same color profile will be able to work in different lighting conditions.
 The transforming process is described below\cite{cite4}:
@@ -46,16 +46,19 @@ The transforming process is described below\cite{cite4}:
     \end{cases}
 \end{align}
 The code used to transform the image is:
-\begin{lstlisting}
+\begin{python}
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-\end{lstlisting}
+\end{python}
 Note that by default, OpenCV uses BGR color space.
 \subsubsection{Extracting}
 OpenCV's built in treshold function is used to utilize multithreading.
 The process of tresholding is printed below:
-\begin{lstlisting}
-mask = cv2.inRange(hsv, np.array((0., 60., 32.)), np.array((180., 255., 255.)))
-\end{lstlisting}
+\begin{python}
+mask = cv2.inRange( hsv, 
+                    np.array((0., 60., 32.)), 
+                    np.array((180., 255., 255.))
+                    )
+\end{python}
 However, simply tresholding is often not enough. The object tracked can have a complex color feature. In order to track the entire object, it is necessary to consider all of the features. Histogram is used to model the color distribution of an object, and me can then map the probability of pixels using backprojection.\\
 \begin{figure}[h!]
 
@@ -110,4 +113,95 @@ The result is significant. A great deal of noises is removed in this process:\\
   \centering
     \includegraphics[width=0.3\textwidth]{../Pictures/after.png}
     \caption{After morphology transformation}\\
+\end{figure}
+\newpage
+
+\subsubsection{Extracting}
+There are two stages of extracting. They are:
+\begin{enumerate}
+  \item Detecting
+  \item Tracking
+\end{enumerate}
+The difference between them is that \emph{Tracking} requires the original location of the object to be known. That information should be fed with \emph{Detecting} in the \emph{first} frame of video source.
+
+By \emph{Detecting}, we find locations where the image of \emph{source} is similar to \emph{template}.
+The algotighm we used in \emph{Detecting} is rather simple. It "shifts" the \emph{template} on the \emph{source}, and find the similarities bewteen the \emph{template} and the image below.
+
+The method of template matching is printed below:
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{python}
+  import numpy as np
+  import cv2
+  import math
+
+  def match(template, image):
+    '''
+    Match template on image and return the centroid's coord.
+    '''
+
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+
+    result = cv2.matchTemplate(gray, patch, cv2.TM_CCOEFF_NORMED)
+    result = np.abs(result) ** 3
+    val, result = cv2.threshold(result, 0.01, 0, cv2.THRESH_TOZERO)
+
+    minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(result)
+
+    height, width, depth = template.shape
+    x, y = maxLoc
+    x += width/2
+    y += height/2
+      
+    return (x,y)
+\end{minted}
+
+In order to make things clearer, we used a marker from the TV series \emph{Person of Interest} to mark the point of interest.
+Here's the code we used to mark the object:
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{python}
+  import numpy as np
+  import cv2
+  import math
+
+  def draw_machine_mark(size, location, image):
+      '''
+      This function draws a machine mark on the image
+      '''
+      original = cv2.imread("assets/machine.png", -1)
+
+      osize = math.sqrt(original.size)/2
+      ratio = size / osize
+      height, width, depth = image.shape
+      timg = cv2.resize(original, (0,0), fx=ratio, fy=ratio)
+      x, y = location 
+
+      image[:] *= 0.8
+
+      x_start = max(0, x - size/2)
+      x_end = min(x_start + size, width)
+      x_start = min(x_end - size, x_start)
+      y_start = max(0, y - size/2)
+      y_end = min(y_start + size, height)
+      y_start = min(y_end - size, y_start)
+      
+      roi = image[y_start : y_end, x_start : x_end]
+      for c in range(0,3):
+          roi[:,:,c] = timg[:,:,c] * (timg[:,:,3] / 255.0) + roi[:,:,c] * (1 - timg[:,:,3] / 255.0) 
+      image[y_start : y_end, x_start : x_end] = roi
+\end{minted}
+Below is an image of the effect:\\
+\begin{figure}[h!]
+
+  \centering
+    \includegraphics[width=0.5\textwidth]{../Pictures/after.png}
+    \caption{Example of tracking effect}\\
 \end{figure}
