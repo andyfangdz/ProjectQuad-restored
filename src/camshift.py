@@ -33,6 +33,8 @@ size_maxium = 256
 flag= True
 MorphOps = False
 Channel = False
+Realtime = False
+Update = False
 
 def abs(n):
     if n>0:
@@ -104,25 +106,27 @@ class App(object):
         cv2.imshow('hist', img)
 
     def run(self):
+        global Update
         global MorphOps
         global Channel
+        global Realtime
         while True:
 
             ret, self.frame = self.cam.read()
             vis = self.frame.copy()
             hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
             mask = cv2.inRange(hsv, np.array((0., 60., 32.)), np.array((180., 255., 255.)))
-
             if self.selection:
                 x0, y0, x1, y1 = self.selection
                 self.track_window = (x0, y0, x1-x0, y1-y0)
                 hsv_roi = hsv[y0:y1, x0:x1]
                 mask_roi = mask[y0:y1, x0:x1]
+                
                 if Channel:
                     hist = cv2.calcHist( [hsv_roi], [0,1], mask_roi, [16,5], [0, 180, 0 ,256] )
                 else:
-                    hist = cv2.calcHist( [hsv_roi], [0], mask_roi, [32], [0, 180] )
-                cv2.normalize(hist, hist, 0, 255, cv2.NORM_MINMAX);
+                    hist = cv2.calcHist( [hsv_roi], [0], mask_roi, [16], [0, 180] )
+                cv2.normalize(hist, hist, 0, 255, cv2.NORM_MINMAX)
                 self.hist = hist.reshape(-1)
                 self.show_hist()
 
@@ -171,6 +175,27 @@ class App(object):
                     self.tracking_state = 2
                 if self.show_backproj:
                     vis[:] = prob[...,np.newaxis]
+                if get_window_size(self.track_window) >= size_treshold and Update:
+                    self.bkp=self.hist
+                    font = cv2.FONT_HERSHEY_SIMPLEX
+                    cv2.putText(vis,'Updating...',(10,200), font, 1,(255,255,255),2,1)
+                    xx0, yy0, xx1, yy1 = self.track_window
+                    xx1 /= 3
+                    yy1 /= 3
+                    xx0 += xx1
+                    yy0 += yy1
+                    if xx1 > 0 and yy1 > 0:
+                        print self.track_window
+                        hsv_roi = hsv[yy0 : yy0 + yy1, xx0 : xx0 + xx1]
+                        mask_roi = mask[yy0 : yy0 + yy1 , xx0 : xx0 + xx1]
+                        cv2.imshow("Tracking Window",hsv_roi)
+                        hist = cv2.calcHist( [hsv_roi], [0], mask_roi, [16], [0, 180] )
+                        cv2.normalize(hist, hist, 0, 255, cv2.NORM_MINMAX)
+                        print cv2.compareHist(hist.reshape(-1), self.bkp, 0)
+                        self.hist = hist.reshape(-1)
+                    self.show_hist()
+                    if not Realtime:
+                        Update = not Update
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(vis,str(track_box[0]),(10,400), font, 1,(255,255,255),2,1)
                 print str(track_box[0])
@@ -191,6 +216,10 @@ class App(object):
                 MorphOps = not MorphOps
             if ch == ord('c'):
                 Channel = not Channel
+            if ch == ord('u'):
+                Update = not Update
+            if ch == ord('r'):
+                Realtime = not Realtime
         cv2.destroyAllWindows()
 
 
