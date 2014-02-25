@@ -42,7 +42,7 @@ emph={MyClass,__init__},          % Custom highlighting
 emphstyle=\ttfamily\color{deepred},    % Custom highlighting style
 stringstyle=\color{deepgreen},
 frame=tb,                         % Any extra options here
-showstringspaces=false            % 
+showstringspaces=false            %
 }}
 
 
@@ -73,9 +73,13 @@ showstringspaces=false            %
 \setCJKmainfont[BoldFont=SimHei]{SimSun}
 \usepackage{graphicx}
 \setCJKmonofont{SimSun}% 设置缺省中文字体
+\fontsize{20pt}
+\baselineskip
+\selectfont
 \parindent 2em   %段首缩进
 \makeindex
 \begin{document}
+\large
 \input{title_c.tex}
 
 \input{overview_c.tex}
@@ -164,7 +168,7 @@ class App(object):
             self.drag_start = None
             flag= False
             if self.selection is not None:
-                self.tracking_state = 1 
+                self.tracking_state = 1
     def show_hist(self):
         bin_count = self.hist.shape[0]
         bin_w = 24
@@ -192,7 +196,7 @@ class App(object):
                 self.track_window = (x0, y0, x1-x0, y1-y0)
                 hsv_roi = hsv[y0:y1, x0:x1]
                 mask_roi = mask[y0:y1, x0:x1]
-                
+
                 if Channel:
                     hist = cv2.calcHist( [hsv_roi], [0,1], mask_roi, [16,5], [0, 180, 0 ,256] )
                 else:
@@ -309,7 +313,7 @@ if __name__ == '__main__':
 
 \end{python}
 \newpage
-\section{\\Bi_calibration.py} \label{App:AppendixB}}
+\section{Bi-calibration.py} \label{App:AppendixB}
 % the \\ insures the section title is centered below the phrase: Appendix B
 \begin{python}
 import numpy as np
@@ -346,7 +350,7 @@ for name in img_names:
         continue
     img_points.append(corners.reshape(-1, 2))
     obj_points.append(pattern_points)
-    
+
     print 'ok'
 
 rms, camera_matrix, dist_coefs, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, (w, h))
