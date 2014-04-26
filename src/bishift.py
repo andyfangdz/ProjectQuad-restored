@@ -27,6 +27,7 @@ import threading
 
 import numpy as np
 import cv2
+import cv2.cv as cv
 import video
 from utils import mark
 
@@ -39,11 +40,56 @@ Channel = False
 Realtime = False
 Update = False
 bflag = True
-
+show_backproj = False
+status = {}
 def abs(n):
     if n>0:
         return n
     return -n
+cameraMatrix1=np.load('cameraMatrix1.npy')
+print "-cameraMatrix1:"
+print cameraMatrix1
+distCoeffs1=np.load('distCoeffs1.npy')
+print "-distCoeffs1:"
+print distCoeffs1
+cameraMatrix2=np.load('cameraMatrix2.npy')
+print "-cameraMatrix2:"
+print cameraMatrix2
+distCoeffs2=np.load('distCoeffs2.npy')
+print "-distCoeffs2:"
+print distCoeffs2
+R=np.load('R.npy')
+print "-R:"
+print R
+T=np.load('T.npy')
+print "-T:"
+print T
+E=np.load('E.npy')
+print "-E:"
+print E
+F=np.load('F.npy' )
+print "-F:"
+print F
+R1=np.array((3,3))
+R2=np.array((3,3))
+P1=np.array((3,4))
+P2=np.array((3,4))
+Q=np.array((4,4))
+cameraMatrix1=cv.fromarray(cameraMatrix1)
+cameraMatrix2=cv.fromarray(cameraMatrix2)
+distCoeffs1=cv.fromarray(distCoeffs1)
+distCoeffs2=cv.fromarray(distCoeffs2)
+R=cv.fromarray(R)
+T=cv.fromarray(T)
+R1=cv.CreateMat(3, 3, cv.CV_64FC1)
+R2=cv.CreateMat(3, 3, cv.CV_64FC1)
+P1=cv.CreateMat(3, 4, cv.CV_64FC1)
+P2=cv.CreateMat(3, 4, cv.CV_64FC1)
+Q=cv.CreateMat(4, 4, cv.CV_64FC1)
+cv.StereoRectify(cameraMatrix1,  cameraMatrix2,distCoeffs1, distCoeffs2, (640,480), R, T, R1, R2, P1, P2, Q=Q) 
+Q = np.asarray(Q)
+print '-Q:'
+print Q
 
 def get_window_size(window):
     x0, y0, x1, y1 = window
@@ -100,6 +146,7 @@ class Tracker(object):
             flag= False
             if self.selection is not None:
                 self.tracking_state = 1 
+
     def show_hist(self):
         bin_count = self.hist.shape[0]
         bin_w = 24
@@ -110,121 +157,93 @@ class Tracker(object):
         img = cv2.cvtColor(img, cv2.COLOR_HSV2BGR)
         cv2.imshow('hist'+str(self.video_src), img)
 
+    def make_selection(self):
+        x0, y0, x1, y1 = self.selection
+        self.track_window = (x0, y0, x1-x0, y1-y0)
+        self.hsv_roi = self.hsv[y0:y1, x0:x1]
+        self.mask_roi = self.mask[y0:y1, x0:x1]
+        if Channel:
+            self.hist = cv2.calcHist( [self.hsv_roi], [0,1], self.mask_roi, [16,5], [0, 180, 0 ,256] )
+        else:
+            self.hist = cv2.calcHist( [self.hsv_roi], [0], self.mask_roi, [16], [0, 180] )
+        cv2.normalize(self.hist, self.hist, 0, 255, cv2.NORM_MINMAX)
+        self.hist = self.hist.reshape(-1)
+        self.show_hist()
+
+        self.vis_roi = self.vis[y0:y1, x0:x1]
+        cv2.bitwise_not(self.vis_roi, self.vis_roi)
+        self.vis[self.mask == 0] = 0
+
+    def get_img(self):
+        self.ret, self.frame = self.cam.read()
+        self.vis = self.frame.copy()
+        self.hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
+        self.mask = cv2.inRange(self.hsv, np.array((0., 60., 32.)), np.array((180., 255., 255.)))
+        
+
+    def track(self):
+        if Channel:
+            self.prob = cv2.calcBackProject([self.hsv], [0,1], self.hist, [0, 180, 0, 256], 1)
+        else:
+            self.prob = cv2.calcBackProject([self.hsv], [0], self.hist, [0, 180], 1)
+        self.prob &= self.mask
+        term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
+        self.previous_window = self.track_window
+        kernel = np.ones((5,5),np.uint8)
+        if MorphOps:
+            self.prob = cv2.morphologyEx(prob, cv2.MORPH_OPEN, kernel)
+            self.prob = cv2.morphologyEx(prob, cv2.MORPH_CLOSE, kernel)
+        self.prob = cv2.GaussianBlur(self.prob,(5,5),0)
+        self.track_box, self.track_window = cv2.CamShift(self.prob, self.track_window, term_crit)
+        if get_window_size(self.track_window) <= size_treshold:
+            self.track_window = get_increased_window(self.previous_window)
+            self.tracking_state = 2
+        else :
+            self.tracking_state = 1
+
     def run(self):
         global Update
         global MorphOps
         global Channel
         global Realtime
         global bflag
+        global show_backproj
         
-
-        ret, self.frame = self.cam.read()
-        vis = self.frame.copy()
-        hsv = cv2.cvtColor(self.frame, cv2.COLOR_BGR2HSV)
-        mask = cv2.inRange(hsv, np.array((0., 60., 32.)), np.array((180., 255., 255.)))
-        mask = cv2.inRange(hsv, np.array((0., 0., 0.)), np.array((180., 255., 255.)))
+        self.get_img()
+        
         if self.selection:
-            x0, y0, x1, y1 = self.selection
-            self.track_window = (x0, y0, x1-x0, y1-y0)
-            hsv_roi = hsv[y0:y1, x0:x1]
-            mask_roi = mask[y0:y1, x0:x1]
             
-            if Channel:
-                hist = cv2.calcHist( [hsv_roi], [0,1], mask_roi, [16,5], [0, 180, 0 ,256] )
-            else:
-                hist = cv2.calcHist( [hsv_roi], [0], mask_roi, [16], [0, 180] )
-            cv2.normalize(hist, hist, 0, 255, cv2.NORM_MINMAX)
-            self.hist = hist.reshape(-1)
-            self.show_hist()
-
-            vis_roi = vis[y0:y1, x0:x1]
-            cv2.bitwise_not(vis_roi, vis_roi)
-            vis[mask == 0] = 0
-
+            self.make_selection()
         if self.tracking_state == 2:
-            if Channel:
-                prob = cv2.calcBackProject([hsv], [0,1], self.hist, [0, 180, 0, 256], 1)
-            else:
-                prob = cv2.calcBackProject([hsv], [0], self.hist, [0, 180], 1)
-            prob &= mask
-            term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
-            self.previous_window = self.track_window
-            kernel = np.ones((5,5),np.uint8)
-            if MorphOps:
-                prob = cv2.morphologyEx(prob, cv2.MORPH_OPEN, kernel)
-                prob = cv2.morphologyEx(prob, cv2.MORPH_CLOSE, kernel)
-            prob = cv2.GaussianBlur(prob,(5,5),0)
-
-            track_box, self.track_window = cv2.CamShift(prob, self.track_window, term_crit)
-            if get_window_size(self.track_window) <= size_treshold:
-                self.track_window = get_increased_window(self.previous_window)
-                self.tracking_state = 2
-            else :
-                self.tracking_state = 1
+            self.track()
             font = cv2.FONT_HERSHEY_SIMPLEX
             print "Target Missing."
-            cv2.putText(vis,'Target Missing',(10,400), font, 1,(255,255,255),2,1)
-
-        if self.tracking_state == 1:
+            cv2.putText(self.vis,'Target Missing',(10,400), font, 1,(255,255,255),2,1)
+        elif self.tracking_state == 1:
             self.selection = None
-            if Channel:
-                prob = cv2.calcBackProject([hsv], [0,1], self.hist, [0, 180, 0, 256], 1)
-            else:
-                prob = cv2.calcBackProject([hsv], [0], self.hist, [0, 180], 1)
-            prob &= mask
-            term_crit = ( cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 1 )
-            self.previous_window = self.track_window
-            kernel = np.ones((5,5),np.uint8)
-            if MorphOps:
-                prob = cv2.morphologyEx(prob, cv2.MORPH_OPEN, kernel)
-                prob = cv2.morphologyEx(prob, cv2.MORPH_CLOSE, kernel)
-            prob = cv2.GaussianBlur(prob,(5,5),0)
-            track_box, self.track_window = cv2.CamShift(prob, self.track_window, term_crit)
-            if get_window_size(self.track_window) <= size_treshold:
-                self.track_window = get_increased_window(self.previous_window)
-                self.tracking_state = 2
+            self.track()
             if self.show_backproj:
-                vis[:] = prob[...,np.newaxis]
+                self.vis[:] = prob[...,np.newaxis]
             xx0, yy0, xx1, yy1 = self.track_window
             img_roi = self.frame[yy0 : yy0 + yy1, xx0 : xx0 + xx1]
             cv2.imshow("Tracking Window"+str(self.video_src),img_roi)
-            if get_window_size(self.track_window) >= size_treshold and Update:
-                self.bkp=self.hist
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                cv2.putText(vis,'Updating...',(10,200), font, 1,(255,255,255),2,1)
-                xx0, yy0, xx1, yy1 = self.track_window
-                xx1 /= 3
-                yy1 /= 3
-                xx0 += xx1
-                yy0 += yy1
-                if xx1 > 0 and yy1 > 0:
-                    print self.track_window
-                    hsv_roi = hsv[yy0 : yy0 + yy1, xx0 : xx0 + xx1]
-                    mask_roi = mask[yy0 : yy0 + yy1 , xx0 : xx0 + xx1]
-                    cv2.imshow("Tracking Window"+str(self.video_src),hsv_roi)
-                    hist = cv2.calcHist( [hsv_roi], [0], mask_roi, [16], [0, 180] )
-                    cv2.normalize(hist, hist, 0, 255, cv2.NORM_MINMAX)
-                    print cv2.compareHist(hist.reshape(-1), self.bkp, 0)
-                    self.hist = hist.reshape(-1)
-                self.show_hist()
-                if not Realtime:
-                    Update = not Update
             font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(vis,str(track_box[0]),(10,400), font, 1,(255,255,255),2,1)
-            print str(track_box[0])
+            cv2.putText(self.vis,str(self.track_box[0]),(10,400), font, 1,(255,255,255),2,1)
+            status[self.video_src]=self.track_box[0]
+            #print str(track_box[0])
             #try: cv2.ellipse(vis, track_box, (0, 0, 255), 2)
             #except: print track_box
-            mark.draw_machine_mark(60, track_box[0], vis)
+            mark.draw_machine_mark(60, self.track_box[0], self.vis)
 
         #cv2.imshow('Original Footage',self.frame)
         if flag:
-            cv2.imshow('camshift'+str(self.video_src), vis)
+            cv2.imshow('camshift'+str(self.video_src), self.vis)
 
         ch = 0xFF & cv2.waitKey(5)
         if ch == 27:
             bflag = False
         if ch == ord('b'):
-            self.show_backproj = not self.show_backproj
+            show_backproj = not show_backproj
         if ch == ord('m'):
             MorphOps = not MorphOps
         if ch == ord('c'):
@@ -239,12 +258,25 @@ class Tracker(object):
 
 if __name__ == '__main__':
     import sys
-    
-    
-
     a=Tracker(0)
     b=Tracker(1)
     while True and bflag:
+        status[0]=(0,0)
+        status[1]=(0,0)
         a.run()
         b.run()
+        #print status
+        x0, y0= status[0]
+        x1, y1= status[1]
+        d = x0 - x1;
+
+        X = x0 * Q[0, 0] + Q[0, 3];
+        Y = y0 * Q[1, 1] + Q[1, 3];
+        Z = Q[2, 3];
+        W = d * Q[3, 2] + Q[3, 3];
+
+        X = X / W;
+        Y = Y / W;
+        Z = Z / W;
+        print (X,Y,Z)
     
