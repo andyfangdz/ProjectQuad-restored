@@ -26,7 +26,7 @@ for name in img_names:
         cv2.drawChessboardCorners(vis, chessboard_size, corners, found)
         cv2.imshow('Corners', vis)
         cv2.imwrite('proc_'+name,vis)
-        cv2.waitKey(200)
+        cv2.waitKey(0)
     if not found:
         print 'chessboard not found'
         continue

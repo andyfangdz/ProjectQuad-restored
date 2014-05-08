@@ -52,14 +52,20 @@ img = np.zeros((512,512,3), np.uint8)
 
 points = [(-100,-100,-100)]
 
-for tick in range(10):
+for tick in range(20):
     (x,y,z) = points[len(points)-1]
-    if tick % 3 == 0:
-        x += 100
-    elif tick % 3 ==1:
-        y += 100
-    elif tick % 3 ==2:
-        z += 100
+    if tick % 6 == 0:
+        x += 40
+    elif tick % 6 ==1:
+        y += 70
+    elif tick % 6 ==2:
+        z += 60
+    elif tick % 6 ==3:
+        y -= 50
+    elif tick % 6 ==4:
+        x -= 70
+    elif tick % 6 ==5:
+        z -= 40
     points.append((x,y,z))
 
 drawFancyAxis(img, 512, 1)
@@ -67,8 +73,8 @@ cv2.imshow("Image", img)
 cv2.waitKey(1000)
 for _start, _end in pairwise(points):
     cv2.imshow("Image", img)
-    cv2.waitKey(100)
-    cv2.line(img, project(_start, 512), project(_end, 512), WHITE, 2)
+    cv2.waitKey(150)
+    cv2.line(img, project(_start, 512), project(_end, 512), WHITE, 1)
 
 cv2.imshow("Image", img)
 

@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import video
 from matplotlib import pyplot as plt
 
 img1 = cv2.imread('myleft.jpg',0)  #queryimage # left image
@@ -72,3 +73,4 @@ img3,img4 = drawlines(img2,img1,lines2,pts2,pts1)
 
 cv2.imshow('Left',img3)
 cv2.imshow('Right',img5)
+cv2.waitKey(0)

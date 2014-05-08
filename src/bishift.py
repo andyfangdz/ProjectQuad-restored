@@ -1,27 +1,5 @@
 #!/usr/bin/env python
 
-'''
-Camshift tracker
-================
-
-This is a demo that shows mean-shift based tracking
-You select a color objects such as your face and it tracks it.
-This reads from video camera (0 by default, or the camera number the user enters)
-
-http://www.robinhewitt.com/research/track/camshift.html
-
-Usage:
-------
-    camshift.py [<video source>]
-
-    To initialize tracking, select the object with mouse
-
-Keys:
------
-    ESC   - exit
-    b     - toggle back-projected probability visualization
-
-'''
 import Queue
 import threading
 
@@ -30,6 +8,14 @@ import cv2
 import cv2.cv as cv
 import video
 from utils import mark
+
+READY = [False, False]
+
+def isReady():
+    if READY:
+        if READY[0] and READY[1]:
+            return True
+    return False
 
 WHITE = (255, 255, 255)
 BLUE = (255, 0, 0)
@@ -48,19 +34,19 @@ def drawFancyAxis(img, imgsize, size):
     k = 20
 
     #x
-    cv2.line(img, project((-imgsize/2, 0, 0), imgsize), project((imgsize/2, 0, 0), imgsize), BLUE, size)
-    cv2.line(img, project((imgsize/2, 0, 0), imgsize), project((imgsize/2 - k, -k, 0), imgsize), BLUE, size)
-    cv2.line(img, project((imgsize/2, 0, 0), imgsize), project((imgsize/2 - k, k, 0), imgsize), BLUE, size)
+    cv2.line(traj, project((-imgsize/2, 0, 0), imgsize), project((imgsize/2, 0, 0), imgsize), BLUE, size)
+    cv2.line(traj, project((imgsize/2, 0, 0), imgsize), project((imgsize/2 - k, -k, 0), imgsize), BLUE, size)
+    cv2.line(traj, project((imgsize/2, 0, 0), imgsize), project((imgsize/2 - k, k, 0), imgsize), BLUE, size)
 
     #y
-    cv2.line(img, project((0, -imgsize/2, 0), imgsize), project((0, imgsize/2, 0), imgsize), GREEN, size)
-    cv2.line(img, project((0, imgsize/2, 0), imgsize), project((k, imgsize/2 - k, 0), imgsize), GREEN, size)
-    cv2.line(img, project((0, imgsize/2, 0), imgsize), project((-k, imgsize/2 - k, 0), imgsize), GREEN, size)
+    cv2.line(traj, project((0, -imgsize/2, 0), imgsize), project((0, imgsize/2, 0), imgsize), GREEN, size)
+    cv2.line(traj, project((0, imgsize/2, 0), imgsize), project((k, imgsize/2 - k, 0), imgsize), GREEN, size)
+    cv2.line(traj, project((0, imgsize/2, 0), imgsize), project((-k, imgsize/2 - k, 0), imgsize), GREEN, size)
 
     #z
-    cv2.line(img, project((0, 0, -imgsize/2), imgsize), project((0, 0, imgsize/2), imgsize), RED, size)
-    cv2.line(img, project((0, 0, imgsize/2), imgsize), project((k, 0, imgsize/2 - k), imgsize), RED, size)
-    cv2.line(img, project((0, 0, imgsize/2), imgsize), project((-k, 0, imgsize/2 - k), imgsize), RED, size)
+    cv2.line(traj, project((0, 0, -imgsize/2), imgsize), project((0, 0, imgsize/2), imgsize), RED, size)
+    cv2.line(traj, project((0, 0, imgsize/2), imgsize), project((k, 0, imgsize/2 - k), imgsize), RED, size)
+    cv2.line(traj, project((0, 0, imgsize/2), imgsize), project((-k, 0, imgsize/2 - k), imgsize), RED, size)
 
     #drawArrow(img, size, (imgsize / 2, imgsize / 2), imgsize / 2,  0, BLUE)
     #drawArrow(img, size, (imgsize / 2, imgsize / 2), imgsize * 1.414 / 2, math.pi / 4, GREEN)
@@ -72,16 +58,23 @@ def pairwise(iterable):
     next(b, None)
     return izip(a, b)
 
+points = [(0,0,0)]
 
+def addAnother(pt):
+    global points
+    points.append(pt)
+    cv2.line(traj, project(points[len(points)-2],512),project(pt,512), WHITE, 2)
+    cv2.imshow("trajectory", traj)
+    print "here am I"
+    cv2.waitKey(10)
 
 
 
 # Create a black image
 traj = np.zeros((512,512,3), np.uint8)
-drawFancyAxis(img, 512, 1)
-cv2.imshow("Image", traj)
+drawFancyAxis(traj, 512, 1)
+cv2.imshow("trajectory", traj)
 
-cv2.waitKey(0)
 
 
 size_treshold = 4
@@ -268,11 +261,13 @@ class Tracker(object):
             
             self.make_selection()
         if self.tracking_state == 2:
+            READY[self.video_src] = False
             self.track()
             font = cv2.FONT_HERSHEY_SIMPLEX
             print "Target Missing."
             cv2.putText(self.vis,'Target Missing',(10,400), font, 1,(255,255,255),2,1)
         elif self.tracking_state == 1:
+            READY[self.video_src] = True
             self.selection = None
             self.track()
             if self.show_backproj:
@@ -306,30 +301,61 @@ class Tracker(object):
         if ch == ord('r'):
             Realtime = not Realtime
     cv2.destroyAllWindows()
+def add(pt1,pt2):
+    (x1,y1,z1)=pt1
+    (x2,y2,z2)=pt2
+    return (x1+x2,y1+y2,z1+z2)
+def aver(pt):
+    (x,y,z)=pt
+    return (x*50,y*50,z*50)
 
-
+def trans(pt):
+    (x,y,z)=pt
+    return (x*10,y*10,0)
 
 if __name__ == '__main__':
     import sys
+    tick = 0
+
+    temp = (0,0,0)
     a=Tracker(0)
     b=Tracker(1)
+    tgt = temp
+    last = temp
     while True and bflag:
         status[0]=(0,0)
         status[1]=(0,0)
         a.run()
         b.run()
         #print status
-        x0, y0= status[0]
-        x1, y1= status[1]
-        d = x0 - x1;
+        
+        if isReady():
+            x0, y0= status[0]
+            x1, y1= status[1]
+            d = x0 - x1;
 
-        X = x0 * Q[0, 0] + Q[0, 3];
-        Y = y0 * Q[1, 1] + Q[1, 3];
-        Z = Q[2, 3];
-        W = d * Q[3, 2] + Q[3, 3];
+            X = x0 * Q[0, 0] + Q[0, 3];
+            Y = y0 * Q[1, 1] + Q[1, 3];
+            Z = Q[2, 3];
+            W = d * Q[3, 2] + Q[3, 3];
 
-        X = X / W;
-        Y = Y / W;
-        Z = Z / W;
-        print (X,Y,Z)
+            X = X / W;
+            Y = Y / W;
+            Z = Z / W;
+
+            (tX,tY,tZ) = temp
+            (tgX,tgY,tgZ) = tgt
+            (laX,laY,laZ) = last
+            temp = ((tX+X)/2,(tY+Y)/2,(tZ+Z)/2)
+            smo = ((tick%5)*(tgX+laX)/5,(tick%5)*(tgY+laY)/5,(tick%5)*(tgZ+laZ)/5)
+            try:
+                addAnother(trans(temp))
+            except OverflowError:
+                pass
+            tick += 1
+            if tick % 5 ==0:
+                last = tgt
+                tgt = temp
+                
+
     
